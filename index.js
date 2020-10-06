@@ -1,15 +1,56 @@
-var XLSX = require('xlsx')
-var fs = require('fs')
-var workbook = XLSX.readFile('Эко_боброшоп.xlsx');
-var sheet_name_list = workbook.SheetNames;
-var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+const nodemailer = require("nodemailer");
+const XLSX = require('xlsx')
+const fs = require('fs')
+const workbook = XLSX.readFile('Эко_боброшоп.xlsx');
+const sheet_name_list = workbook.SheetNames;
+const xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+
+let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'btza2dlbiyqfl5rs@ethereal.email', // generated ethereal user
+        pass: 'McfMFjyrnXxq6sQkCJ', // generated ethereal password
+    },
+});
+
+let errors = [];
+
+function send(goods, name, email, file) {
+
+    try {
+        console.log(goods, name, email, file);
+        /// code ....
+        // transporter.sendMail({
+        //     from: '"Fred Foo 👻" <btza2dlbiyqfl5rs@ethereal.email> ', // sender address
+        //     to: "nikhvatov19@gmail.com", // list of receivers
+        //     subject: "Hello ✔", // Subject line
+        //     text: "Hello world?", // plain text body
+        //     html: "<b>Hello world?</b>", // html body
+        // });
+        
+    } catch (error) {
+        errors.push({
+            "name":name,
+            "email": email,
+            "goods": goods
+        })
+        console.log(`Не удалось отправить письмо на почту ${email} `);
+        fs.writeFileSync(`./error.json`, JSON.stringify(errors))
+    }
+}
+
+
 
 for (let index = 0; index < xlData.length; index++) {
-    console.log('Тавар: ' + xlData[index].goodName);
-    console.log('Цена: ' + xlData[index].price);
-    console.log('Имя: ' + xlData[index].userLastName + xlData[index].userFirstName);
-    console.log('Почта: ' + xlData[index].userName + '@croc.ru');
-    console.log('----');
 
-
-}
+    
+    send(
+        xlData[index].goodName,
+        `${xlData[index].userLastName} ${xlData[index].userFirstName}`, 
+        `${xlData[index].userName}@croc.ru` , 
+        'file...'
+        )
+    }
+    
