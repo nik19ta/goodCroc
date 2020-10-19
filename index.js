@@ -49,12 +49,12 @@ function send(goods, name, email, file) {
 
 for (let index = 0; index < xlData.length; index++) {
 
-    send(
-        xlData[index].goodName,
-        `${xlData[index].userLastName} ${xlData[index].userFirstName}`, 
-        `${xlData[index].userName}@croc.ru` , 
-        'file...'
-        )
+    // send(
+    //     xlData[index].goodName,
+    //     `${xlData[index].userLastName} ${xlData[index].userFirstName}`, 
+    //     `${xlData[index].userName}@croc.ru` , 
+    //     'file...'
+    //     )
 }
     
 function createImg() {
@@ -62,7 +62,7 @@ function createImg() {
         ctx.drawImage(image, 0, 0, 1654, 2339)
         ctx.font = 'bold 92px Croc'
         ctx.rotate(0)
-        ctx.fillText(`Nikita Khvatov`, 135, 1150)
+        ctx.fillText(`Мосашвили Александр`, 135, 1150)
         fs.writeFileSync('index.html', `<!DOCTYPE html >
         <html lang="en">
         <head>
