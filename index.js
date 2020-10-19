@@ -48,11 +48,10 @@ function send(goods, name, email, file) {
 
 
 for (let index = 0; index < xlData.length; index++) {
-
     // send(
     //     xlData[index].goodName,
     //     `${xlData[index].userLastName} ${xlData[index].userFirstName}`, 
-    //     `${xlData[index].userName}@croc.ru` , 
+    //     `${xlData[index].userName}@croc.ru` ,
     //     'file...'
     //     )
 }
