@@ -12,7 +12,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 
 const app = express();
-const jsonParser = bodyParser.json()
+const jsonParser = bodyParser.json();
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -27,7 +27,7 @@ app.post('/send', jsonParser, function (req, res) {
     console.log(req.body.login, req.body.password);
     let transporter = nodemailer.createTransport({
         host: "app.croc.ru",
-        port: 587,
+        port: 25,
         secure: false, // true for 465, false for other ports
         auth: {
             user: req.body.login, // generated ethereal user
@@ -37,12 +37,13 @@ app.post('/send', jsonParser, function (req, res) {
 
 
     transporter.sendMail({
-            from: req.body.login, // sender address
+            from: 'bobriksbank@croc.ru', // sender address
             to: 'mosashvili_is18@st.ithub.ru', // list of receivers
             subject: "Hello ✔", // Subject line
             text: "Hello world?", // plain text body
             html: "<b>Hello world?</b>", // html body
         });
 
-})
+});
 app.listen(3000);
+console.log('Startserv...');
