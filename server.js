@@ -23,6 +23,9 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');});
+
 app.post('/send', jsonParser, function (req, res) {
     console.log(req.body.login, req.body.password);
     let transporter = nodemailer.createTransport({
