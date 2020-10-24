@@ -29,8 +29,8 @@ app.get('/', function (req, res) {
 app.post('/send', jsonParser, function (req, res) {
     console.log(req.body.login, req.body.password);
     let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
+        host: "smtp.croc.ru",
+        port: 25,
         secure: true, // true for 465, false for other ports
         auth: {
             user: req.body.login, // generated ethereal user
@@ -41,12 +41,12 @@ app.post('/send', jsonParser, function (req, res) {
 
     transporter.sendMail({
             from: 'bobriksbank@croc.ru', // sender address
-            to: 'mosashvili_is18@st.ithub.ru', // list of receivers
+            to: 'eskvortsova@croc.ru', // list of receivers
             subject: "Hello ✔", // Subject line
             text: "Hello world?", // plain text body
             html: "<b>Hello world?</b>", // html body
         });
 
 });
-app.listen(80);
+app.listen(3000);
 console.log('Startserv...');
