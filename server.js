@@ -29,8 +29,8 @@ app.get('/', function (req, res) {
 app.post('/send', jsonParser, function (req, res) {
     console.log(req.body.login, req.body.password);
     let transporter = nodemailer.createTransport({
-        host: "app.croc.ru",
-        port: 25,
+        host: "smtp.gmail.com",
+        port: 465,
         secure: false, // true for 465, false for other ports
         auth: {
             user: req.body.login, // generated ethereal user
